@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+export VERSION=$(git describe | sed 's/^v//')
