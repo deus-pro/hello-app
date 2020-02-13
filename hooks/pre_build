@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-uname -a
-cat /etc/os-release
-apt list --installed
-export VERSION=$(git describe | sed 's/^v//')

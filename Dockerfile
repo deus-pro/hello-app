@@ -5,5 +5,5 @@ RUN go install hello-app
 FROM alpine:latest
 COPY --from=0 /go/bin/hello-app .
 ENV PORT 8080
-ENV VERSION $VERSION
+ENV VERSION $DOCKER_TAG
 CMD ["./hello-app"]
