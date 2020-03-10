@@ -3,5 +3,5 @@ PROJECT_ID=dojo-gcp
 
 build :
 	docker build \
-	--build-arg "DOCKER_TAG=${DOCKER_TAG}" \
-	-t ${IMAGE_NAME} .
+	--build-arg "TAG=${TAG}" \
+	-t ${DOCKER_REPO}:${TAG} .
