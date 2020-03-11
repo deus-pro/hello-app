@@ -8,5 +8,5 @@ ENV PORT 8080
 ARG TAG
 RUN env
 RUN echo $TAG
-ENV VERSION $TAG
+ENV VERSION=$TAG
 CMD ["./hello-app"]
