@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 export TAG=$(git describe HEAD --tags)
 make push
+make tag
