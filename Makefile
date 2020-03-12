@@ -6,5 +6,8 @@ build :
 	--build-arg "TAG=${TAG}" \
 	-t ${DOCKER_REPO}:${TAG} .
 
-push : build
+push : build tag
 	docker push ${DOCKER_REPO}:${TAG}
+
+tag :
+	docker tag ${DOCKER_REPO}:${TAG} ${DOCKER_REPO}:latest
