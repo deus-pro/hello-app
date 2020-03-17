@@ -9,6 +9,7 @@ build :
 
 push :
 	docker push ${DOCKER_REPO}:${TAG}
+	docker push ${DOCKER_REPO}:latest
 
 tag :
 	docker tag ${DOCKER_REPO}:${TAG} ${DOCKER_REPO}:latest
