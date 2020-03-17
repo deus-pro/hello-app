@@ -7,7 +7,7 @@ build :
 	--build-arg "TAG=${TAG}" \
 	-t ${DOCKER_REPO}:${TAG} .
 
-push : build
+push :
 	docker push ${DOCKER_REPO}:${TAG}
 
 tag :
