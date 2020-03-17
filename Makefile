@@ -1,4 +1,5 @@
 PROJECT_ID=dojo-gcp
+TAG := $(shell git describe HEAD --tags)
 .PHONY : build
 
 build :
