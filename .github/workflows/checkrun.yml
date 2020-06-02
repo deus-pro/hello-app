@@ -1,0 +1,19 @@
+name: 'Test check runs'
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  check_run:
+    types:
+    - requested_action
+
+jobs:
+  echo_hello:
+    name: 'Echo hello message'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: 'Echo hello message'
+      run: echo 'Hello from post'
