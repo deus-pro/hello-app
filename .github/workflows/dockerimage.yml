@@ -17,7 +17,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: specify-tag
-      run: export TAG=$(git describe HEAD --tags)
+      run: echo "::set-env name=TAG::$(git describe HEAD --tags)"
     - name: build-push
       uses: docker/build-push-action@v1
       with:
@@ -25,4 +25,4 @@ jobs:
         password: ${{ secrets.ROBOT_PASS }}
         registry: quay.io
         repository: deuspro/hello-app
-        tag: ${TAG}
+        tag: $TAG
