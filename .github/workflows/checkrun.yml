@@ -18,10 +18,4 @@ jobs:
     - name: 'Echo hello message'
       run: echo 'Hello from post'
     - name: 'Echo tag variable'
-      run: |
-        if [ -n ${GITHUB_REF} ]
-        then
-          echo ${GITHUB_REF}
-        else
-          echo "Tag not defined"
-        fi
+      run: if [ -n ${GITHUB_REF} ]; then echo ${GITHUB_REF}; else echo "Tag not defined"; fi
