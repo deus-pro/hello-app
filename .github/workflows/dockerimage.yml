@@ -14,6 +14,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: specify-tag
       run: git describe HEAD --tags
     - name: get-tag-name
