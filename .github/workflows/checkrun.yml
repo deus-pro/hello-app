@@ -19,7 +19,7 @@ jobs:
       run: echo 'Hello from post'
     - name: 'Echo tag variable'
       run: |
-        if ${GITHUB_REF}
+        if [ -n ${GITHUB_REF} ]
         then
           echo ${GITHUB_REF}
         else
