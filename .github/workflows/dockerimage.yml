@@ -18,6 +18,7 @@ jobs:
         fetch-depth: 0
     - name: specify-tag
       run: echo "::set-env name=TAG::$(git describe HEAD --tags)"
+    - run: echo ${TAG}
     - name: build-push
       uses: docker/build-push-action@v1
       with:
