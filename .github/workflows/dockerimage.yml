@@ -22,6 +22,7 @@ jobs:
     - name: build-push
       uses: docker/build-push-action@v1
       with:
+        build_args: TAG=${{ env.TAG }}
         username: ${{ secrets.ROBOT_NAME }}
         password: ${{ secrets.ROBOT_PASS }}
         registry: quay.io
