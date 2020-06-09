@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: specify-tag
-      run: export TAG=$(git describe HEAD --tags)
+      run: git describe HEAD --tags
     - name: get-tag-name
       uses: olegtarasov/get-tag@v2
       id: tagName
