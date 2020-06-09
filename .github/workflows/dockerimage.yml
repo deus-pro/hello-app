@@ -17,11 +17,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: specify-tag
-      run: git describe HEAD --tags
-    - name: get-tag-name
-      uses: olegtarasov/get-tag@v2
-      id: tagName
-    - run: echo ${GIT_TAG_NAME}
+      run: export TAG=$(git describe HEAD --tags)
     - name: build-push
       uses: docker/build-push-action@v1
       with:
@@ -29,4 +25,4 @@ jobs:
         password: ${{ secrets.ROBOT_PASS }}
         registry: quay.io
         repository: deuspro/hello-app
-        tag_with_ref: true
+        tag: ${TAG}
