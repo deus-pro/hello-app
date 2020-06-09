@@ -26,4 +26,4 @@ jobs:
         password: ${{ secrets.ROBOT_PASS }}
         registry: quay.io
         repository: deuspro/hello-app
-        tags: $TAG
+        tags: ${{ env.TAG }}
