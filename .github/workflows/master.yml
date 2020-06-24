@@ -1,18 +1,35 @@
-
-name: Docker Image CI
-
+name: Build release
 on:
   push:
     branches:
     - master
-
 jobs:
-  build:
+  release_build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
       with:
         fetch-depth: '0'
+    - name: Bump version
+      id: bumptag
+      uses: anothrNick/github-tag-action@1.22.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: true
+        DEFAULT_BUMP: 'patch'
+        DRY_RUN: true
+    - name: specify-tag
+      run: echo "::set-env name=TAG::${{ steps.bumptag.outputs.new_tag }}"
+    - run: echo ${TAG}
+    - name: build-push
+      uses: docker/build-push-action@v1
+      with:
+        build_args: TAG=${{ env.TAG }}
+        username: ${{ secrets.ROBOT_NAME }}
+        password: ${{ secrets.ROBOT_PASS }}
+        registry: quay.io
+        repository: deuspro/hello-app
+        tags: ${{ env.TAG }}
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.22.0
       env:
