@@ -36,3 +36,13 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
         DEFAULT_BUMP: 'patch'
+    - name: Configure Git
+      run: |
+        git config user.name "$GITHUB_ACTOR"
+        git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+    - name: Run chart-releaser
+      uses: helm/chart-releaser-action@v1.0.0-rc.2
+      env:
+        CR_TOKEN: "${{ secrets.CR_TOKEN }}"
+      with:
+        charts_dir: "deployments/helm"
