@@ -1,4 +1,4 @@
-FROM golang:1.8-alpine
+FROM golang:1.14-alpine
 ADD . /go/src/hello-app
 RUN apk add --update --no-cache git
 RUN go get math/bits && \
