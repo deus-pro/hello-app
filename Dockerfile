@@ -1,6 +1,9 @@
 FROM golang:1.8-alpine
 ADD . /go/src/hello-app
-RUN go install hello-app
+RUN go get github.com/prometheus/client_golang/prometheus && \
+    go get github.com/prometheus/client_golang/prometheus/promauto && \
+    go get github.com/prometheus/client_golang/prometheus/promhttp && \
+    go install hello-app
 
 FROM alpine:latest
 COPY --from=0 /go/bin/hello-app .
