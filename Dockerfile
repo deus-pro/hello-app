@@ -1,5 +1,6 @@
 FROM golang:1.8-alpine
 ADD . /go/src/hello-app
+RUN apk add --update --no-cache git
 RUN go get github.com/prometheus/client_golang/prometheus && \
     go get github.com/prometheus/client_golang/prometheus/promauto && \
     go get github.com/prometheus/client_golang/prometheus/promhttp && \
