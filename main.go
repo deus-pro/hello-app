@@ -35,15 +35,13 @@ func main() {
 	// register hello function to handle all requests
 	server := http.NewServeMux()
 	server.HandleFunc("/", hello)
+	// expose Prometheus metrics
+	server.Handle("/metrics", promhttp.Handler())
 
 	// start the web server on port and accept requests
 	log.Printf("Server listening on port %s", port)
 	err := http.ListenAndServe(":"+port, server)
 	log.Fatal(err)
-
-	// expose Prometheus metrics
-	http.Handle("/metrics", promhttp.Handler())
-	http.ListenAndServe(":2112", nil)
 }
 
 // hello responds to the request with a plain-text "Hello, world" message.
