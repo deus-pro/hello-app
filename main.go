@@ -22,6 +22,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func main() {
@@ -39,6 +40,10 @@ func main() {
 	log.Printf("Server listening on port %s", port)
 	err := http.ListenAndServe(":"+port, server)
 	log.Fatal(err)
+
+	// expose Prometheus metrics
+	http.Handle("/metrics", promhttp.Handler())
+	http.ListenAndServe(":2112", nil)
 }
 
 // hello responds to the request with a plain-text "Hello, world" message.

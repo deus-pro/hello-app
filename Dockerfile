@@ -1,6 +1,12 @@
-FROM golang:1.8-alpine
+FROM golang:1.14-alpine
 ADD . /go/src/hello-app
-RUN go install hello-app
+RUN apk add --update --no-cache git
+RUN go get math/bits && \
+    go get github.com/cespare/xxhash && \
+    go get github.com/prometheus/client_golang/prometheus && \
+    go get github.com/prometheus/client_golang/prometheus/promauto && \
+    go get github.com/prometheus/client_golang/prometheus/promhttp && \
+    go install hello-app
 
 FROM alpine:latest
 COPY --from=0 /go/bin/hello-app .
