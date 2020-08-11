@@ -22,3 +22,14 @@ jobs:
         registry: quay.io
         repository: deuspro/hello-app
         tags: ${{ env.TAG }}
+    - name: install helm
+      uses: azure/setup-helm@v1
+    - name: bake a helm package
+      run: helm package --app-version ${{ env.TAG }} --version ${{ env.TAG }} ./deployments/helm/hello-app/
+    - name: deploy to k8s
+      uses: 'deliverybot/helm@v1'
+      with:
+        release: ${{ env.TAG }}
+        namespace: hello
+        chart: app
+        chart_version: ${{ env.TAG }}
