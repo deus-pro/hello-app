@@ -40,7 +40,6 @@ jobs:
     - name: deploy to k8s
       uses: 'deliverybot/helm@v1'
       with:
-        release: ${{ env.TAG }}
+        release: hello-app
         namespace: hello
-        chart: app
-        chart_version: ${{ env.TAG }}
+        chart: "/home/runner/work/hello-app/hello-app/hello-app-${{ env.TAG }}.tgz"
