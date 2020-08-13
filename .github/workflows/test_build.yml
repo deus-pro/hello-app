@@ -38,7 +38,8 @@ jobs:
     - name: Authenticate in k8s
       run: |-
         gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }}
-        echo "::set-env name=KUBECONFIG_FILE::$(cat ~/.kube/config)"
+        KUBECONFIG_FILE=$(cat ~/.kube/config)
+        echo "::add-mask::$KUBECONFIG_FILE"
     - name: deploy to k8s
       uses: 'deliverybot/helm@v1'
       with:
@@ -47,4 +48,4 @@ jobs:
         chart: "/home/runner/work/hello-app/hello-app/hello-app-${{ env.TAG }}.tgz"
         helm: helm3
       env:
-        KUBECONFIG_FILE: ${{ env.KUBECONFIG_FILE }}
+        KUBECONFIG_FILE: ${{ secrets.KUBECONFIG_FILE }}
