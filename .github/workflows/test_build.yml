@@ -43,3 +43,4 @@ jobs:
         release: hello-app
         namespace: hello
         chart: "/home/runner/work/hello-app/hello-app/hello-app-${{ env.TAG }}.tgz"
+        helm: helm3
