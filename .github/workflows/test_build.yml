@@ -38,7 +38,7 @@ jobs:
     - name: Authenticate in k8s
       run: |-
         gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }}
-        KUBECONFIG_FILE=$(cat ~/.kube/config)
+        KUBECONFIG_FILE=$(<~/.kube/config)
         echo "::add-mask::$KUBECONFIG_FILE"
     - name: deploy to k8s
       uses: 'deliverybot/helm@v1'
