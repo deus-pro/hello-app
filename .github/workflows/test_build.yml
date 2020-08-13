@@ -3,6 +3,9 @@ on:
   push:
     branches-ignore:
     - 'master'
+env:
+  GKE_CLUSTER: dojo-gke-cluster
+  GKE_ZONE: us-central1
 jobs:
   test_build:
     runs-on: ubuntu-latest
@@ -32,6 +35,8 @@ jobs:
         version: '290.0.1'
         service_account_key: ${{ secrets.GKE_DEVELOPER }}
         project_id: ${{ secrets.GKE_PROJECT }}
+    - name: Authenticate in k8s
+      run: gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }}
     - name: deploy to k8s
       uses: 'deliverybot/helm@v1'
       with:
