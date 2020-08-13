@@ -35,11 +35,6 @@ jobs:
         version: '290.0.1'
         service_account_key: ${{ secrets.GKE_DEVELOPER }}
         project_id: ${{ secrets.GKE_PROJECT }}
-    - name: Authenticate in k8s
-      run: |-
-        gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }}
-        KUBECONFIG_FILE=$(<~/.kube/config)
-        echo "::add-mask::$KUBECONFIG_FILE"
     - name: deploy to k8s
       uses: 'deliverybot/helm@v1'
       with:
