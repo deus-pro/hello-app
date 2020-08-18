@@ -37,5 +37,5 @@ jobs:
         chart: "/home/runner/work/hello-app/hello-app/hello-app-${{ env.TAG }}.tgz"
         helm: helm3
       env:
-        KUBECONFIG_FILE: ${{ secrets.KUBECONFIG_FILE }}
+        KUBECONFIG_FILE: '${{ secrets.KUBECONFIG_FILE }}'
         HELM_DEBUG: true
