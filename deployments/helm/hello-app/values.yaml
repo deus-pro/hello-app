@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: plussell/hello-app
+  repository: quay.io/deuspro/hello-app
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
