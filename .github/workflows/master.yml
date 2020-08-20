@@ -36,6 +36,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
         DEFAULT_BUMP: 'patch'
+    - name: install helm
+      uses: azure/setup-helm@v1
+    - name: bake a helm package
+      run: helm package --app-version ${{ env.TAG }} --version ${{ env.TAG }} ./deployments/helm/hello-app/
     - name: Configure Git
       run: |
         git config user.name "$GITHUB_ACTOR"
@@ -45,4 +49,5 @@ jobs:
       env:
         CR_TOKEN: "${{ secrets.CR_TOKEN }}"
       with:
-        charts_dir: "deployments/helm/hello-app"
+        charts_dir: "/home/runner/work/hello-app/hello-app/"
+        version: ${{ env.TAG }}
