@@ -29,13 +29,13 @@ jobs:
       uses: azure/setup-helm@v1
     - name: bake a helm package
       run: helm package --app-version ${{ env.TAG }} --version ${{ env.TAG }} ./deployments/helm/hello-app/
-    - name: deploy to k8s
-      uses: 'deliverybot/helm@v1'
+    - name: Setup gcloud CLI
+      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
-        release: hello-app
-        namespace: hello
-        chart: "/home/runner/work/hello-app/hello-app/hello-app-${{ env.TAG }}.tgz"
-        helm: helm3
-      env:
-        KUBECONFIG_FILE: '${{ secrets.KUBECONFIG_FILE }}'
-        HELM_DEBUG: true
+        version: '290.0.1'
+        service_account_key: ${{ secrets.GKE_DEVELOPER }}
+        project_id: ${{ secrets.GKE_PROJECT }}
+    - name: Authenticate in k8s
+      run: gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }}
+    - name: deploy helm to k8s
+      run: helm upgrade hello-app /home/runner/work/hello-app/hello-app/hello-app-${{ env.TAG }}.tgz --install --wait --atomic --namespace=hello --set=app.name=hello-app
