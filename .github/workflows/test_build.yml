@@ -38,4 +38,4 @@ jobs:
     - name: Authenticate in k8s
       run: gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }}
     - name: deploy helm to k8s
-      run: helm upgrade hello-app /home/runner/work/hello-app/hello-app/hello-app-${{ env.TAG }}.tgz --install --wait --atomic --namespace=hello --set=app.name=hello-app
+      run: helm upgrade hello-app /home/runner/work/hello-app/hello-app/hello-app-${{ env.TAG }}.tgz --install --wait --atomic --namespace=hello --set=app.name=hello-app --create-namespace
